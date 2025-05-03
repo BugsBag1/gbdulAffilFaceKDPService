@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:tns="http://gbdulaffilface_kdp.egp.gbdul.tamur.kz" targetNamespace="http://gbdulaffilface_kdp.egp.gbdul.tamur.kz">
+    <xsd:element name="Request" type="tns:RequestDataType">
+        <xsd:annotation>
+            <xsd:documentation>Запрос на предоставление сведений об аффилиированных лицах юридического лица</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:element name="Response" type="tns:ResponseDataType">
+        <xsd:annotation>
+            <xsd:documentation>Ответ на запрос</xsd:documentation>
+        </xsd:annotation>
+    </xsd:element>
+    <xsd:complexType name="RequestDataType">
+        <xsd:annotation>
+            <xsd:documentation>Формат запроса</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="RequestorBIN" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>БИН владельца ИС ГО, отправившей запрос</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="BIN" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>БИН организации, для которой запрашивается справка</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="InfoAbtToken" type="tns:InfoAbtToken" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Информация о токенах</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="ResponseDataType">
+        <xsd:annotation>
+            <xsd:documentation>Формат ответа</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Status" type="tns:DirectoryType">
+                <xsd:annotation>
+                    <xsd:documentation>Статус ответа</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="AffilInfos" type="tns:AffilInfosType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Сведения об аффилиированных лицах</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="AffilInfosType">
+        <xsd:annotation>
+            <xsd:documentation>Основной тип, описывающий сведения об аффилиированных лицах</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="BIN" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>БИН организации</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="FullNameRu" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Полное наименование на русском языке</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="FullNameKz" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Полное наименование на государственном языке</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Founders" type="tns:FounderType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>Сведения об учредителях и где ЮЛ учредитель</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="countFlFounders" type="xsd:int" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Количество учредителей физлиц</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="countUlFounders" type="xsd:int" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Количество учредителей юрлиц</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="FounderType">
+        <xsd:annotation>
+            <xsd:documentation>Основной тип, описывающий сведения учредителях юрлицах юрлица и их учредителях</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="UL" type="tns:FounderULType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Юрлицо в котором запрашиваемый ЮЛ является учредителем</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="FounderFL_first" type="tns:FounderFLType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>учредитель -- физлицо запрашиваемого ЮЛ</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="FounderUL_first" type="tns:FounderULType" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>учредитель -- юрлицо запрашиваемого ЮЛ</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="FoundersUL" type="tns:FounderULType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>учредители юрлица -- FounderUL_first</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="FoundersFL" type="tns:FounderFLType" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>учредители физлица -- FounderUL_first</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="FounderFLType">
+        <xsd:annotation>
+            <xsd:documentation>Тип описывающий учредителя - физлицо</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="IIN" type="xsd:string" minOccurs="0"/>
+            <xsd:element name="SurName" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Фамилия</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="Name" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Имя</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="MiddleName" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Отчество</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="FounderULType">
+        <xsd:annotation>
+            <xsd:documentation>Основной тип, описывающий учредителя-юрлицо</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="BIN" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>БИН</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="OrganizationNameRu" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Наименование организации на русском языке</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="OrganizationNameKz" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>Наименование организации на государственном языке</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="DirectoryType">
+        <xsd:annotation>
+            <xsd:documentation>Тип, описывающий данные справочника</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Code" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>код</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="NameRu" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>значение на русском языке</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="NameKz" type="xsd:string">
+                <xsd:annotation>
+                    <xsd:documentation>значение нагосударственном языке</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="TokenInfo">
+        <xsd:annotation>
+            <xsd:documentation>Информация о токене</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="Code" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Токен безопасности</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+            <xsd:element name="PublicKey" type="xsd:string" minOccurs="0">
+                <xsd:annotation>
+                    <xsd:documentation>Публичный ключ, необходимый для проверки валидности токена безопасности</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="InfoAbtToken">
+        <xsd:annotation>
+            <xsd:documentation>Информация о токене и учредителях</xsd:documentation>
+        </xsd:annotation>
+        <xsd:sequence>
+            <xsd:element name="tokens" type="tns:TokenInfo" minOccurs="0" maxOccurs="unbounded">
+                <xsd:annotation>
+                    <xsd:documentation>Токены</xsd:documentation>
+                </xsd:annotation>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>

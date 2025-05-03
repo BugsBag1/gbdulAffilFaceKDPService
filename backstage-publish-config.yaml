@@ -1,0 +1,14 @@
+name: sb-eias-ft-service
+title: Сервис по проверке связи с террористической деятельностью и экстремизмом
+description: |
+  Предоставление сведений о наличии/отсутствии физических и юридических лиц в перечне организаций и лиц, связанных с финансированием терроризма и экстремизма
+
+  Сервис Smartbrsidge: https://sb.egov.kz/v2/services/passport/ORGH5-S-5635
+
+  Ключ сервиса Smartbridge: `EIASFTSync`
+tags:
+openapi:
+  server: govtech-internal-gateway
+  # Список тегов, включаемых в OpenAPI конфигурацию
+  # Если не указано, то включаются все теги
+  tagsIncluded:
