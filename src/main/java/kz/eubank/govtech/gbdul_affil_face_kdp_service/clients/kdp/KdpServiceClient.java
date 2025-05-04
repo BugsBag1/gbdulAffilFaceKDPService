@@ -1,6 +1,6 @@
 package kz.eubank.govtech.gbdul_affil_face_kdp_service.clients.kdp;
 
-import kz.govtech.m11s.sb_sync_sample_service.clients.kdp.dto.KdpToken;
+import kz.eubank.govtech.gbdul_affil_face_kdp_service.clients.kdp.dto.KdpToken;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
