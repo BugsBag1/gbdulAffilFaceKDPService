@@ -9,7 +9,30 @@ import lombok.Data;
 public class ResponseDTO {
     @Schema(description = "Статус ответа")
     private DirectoryTypeDTO status;
-    @Schema
+    @Schema(description = "Сведения об аффилиированных лицах")
     private AffilInfosTypeDTO affilInfos;
 
+    public ResponseDTO(DirectoryTypeDTO status, AffilInfosTypeDTO affilInfos) {
+        this.status = status;
+        this.affilInfos = affilInfos;
+    }
+
+    public ResponseDTO() {
+    }
+
+    public DirectoryTypeDTO getStatus() {
+        return status;
+    }
+
+    public void setStatus(DirectoryTypeDTO status) {
+        this.status = status;
+    }
+
+    public AffilInfosTypeDTO getAffilInfos() {
+        return affilInfos;
+    }
+
+    public void setAffilInfos(AffilInfosTypeDTO affilInfos) {
+        this.affilInfos = affilInfos;
+    }
 }

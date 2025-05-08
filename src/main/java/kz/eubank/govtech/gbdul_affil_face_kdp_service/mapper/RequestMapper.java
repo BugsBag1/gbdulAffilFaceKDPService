@@ -6,13 +6,16 @@ import kz.eubank.govtech.gbdul_affil_face_kdp_service.dto.requestDataType.TokenI
 import kz.eubank.govtech.gbdul_affil_face_kdp_service.xsd.RequestAndResponse.InfoAbtToken;
 import kz.eubank.govtech.gbdul_affil_face_kdp_service.xsd.RequestAndResponse.RequestDataType;
 import kz.eubank.govtech.gbdul_affil_face_kdp_service.xsd.RequestAndResponse.TokenInfo;
+import org.mapstruct.MapMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface RequestMapper {
 
+    @Mapping(source = "bin", target = "BIN")
     RequestDataType map(RequestDTO requestDto);
 
     InfoAbtToken mapInfoAbtToken(InfoAbtTokenDTO infoAbtTokenDTO);

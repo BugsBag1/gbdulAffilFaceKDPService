@@ -35,23 +35,24 @@ public class AppService {
     private final static String STATUS_NOT_FOUND = "404";
 
     public ResponseDTO getAffilFaceKDP(String requestorBIN, String bin){
-        final KdpToken kdpToken;
-        try {
-            kdpToken = kdpServiceClient.getKdpToken(SERVICE_ID, requestorBIN, requestorBIN, requestorBIN);
-        } catch (KdpServiceError.KdpNotFoundError e) {
-            throw new BadRequestException("KDP token not found", Errors.KDP_TOKEN_NOT_FOUND);
-        }
+//        final KdpToken kdpToken;
+//        try {
+//            kdpToken = kdpServiceClient.getKdpToken(SERVICE_ID, requestorBIN, requestorBIN, requestorBIN);
+//        } catch (KdpServiceError.KdpNotFoundError e) {
+//            throw new BadRequestException("KDP token not found", Errors.KDP_TOKEN_NOT_FOUND);
+//        }
 
         // Сожаем токен
         InfoAbtTokenDTO infoAbtTokenDTO = new InfoAbtTokenDTO();
         TokenInfoDTO tokenInfoDTO = new TokenInfoDTO();
         List<TokenInfoDTO> tokenInfoDTOList = new ArrayList<>();
-        tokenInfoDTO.setCode(kdpToken.getToken());
-        tokenInfoDTO.setPublicKey(kdpToken.getPublicKey());
+        tokenInfoDTO.setCode("Code");
+        tokenInfoDTO.setPublicKey("public_key");
         tokenInfoDTOList.add(tokenInfoDTO);
         infoAbtTokenDTO.setTokens(tokenInfoDTOList);
 
         RequestDTO request = new RequestDTO();
+        System.out.println("BINNN == " + bin);
         request.setBin(bin);
         request.setRequestorBIN(requestorBIN);
         request.setInfoAbtToken(infoAbtTokenDTO);
@@ -75,6 +76,6 @@ public class AppService {
             );
         }
 
-        return converter.createResponse(dataResponse);
+        return converter.processCreateResponse(dataResponse);
     }
 }

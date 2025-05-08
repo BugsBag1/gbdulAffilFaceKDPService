@@ -251,6 +251,11 @@
                             <artifactId>lombok</artifactId>
                             <version>1.18.24</version>
                         </path>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>1.5.2.Final</version>
+                        </path>
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
@@ -260,7 +265,7 @@
                 <version>2.5.0</version>
                 <executions>
                     <execution>
-                        <id>xjc-Request</id>
+                        <id>xjc-RequestAndResponse</id>
                         <goals>
                             <goal>xjc</goal>
                         </goals>
@@ -271,7 +276,27 @@
                             </sources>
                             <encoding>UTF-8</encoding>
                             <locale>ru</locale>
+                            <clearOutputDir>false</clearOutputDir>
                             <packageName>kz.eubank.govtech.gbdul_affil_face_kdp_service.xsd.RequestAndResponse</packageName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>${project.build.directory}/generated-sources/jaxb</source>
+                            </sources>
                         </configuration>
                     </execution>
                 </executions>

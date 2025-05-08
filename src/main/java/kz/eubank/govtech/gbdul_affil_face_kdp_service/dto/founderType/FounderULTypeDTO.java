@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class FounderULTypeDTO {
     @Schema(description = "БИН")
-    private String BIN;
+    private String bin;
     @Schema(description = "Наименование организации на русском языке")
     private String organizationNameRu;
     @Schema(description = "Наименование организации на государственном языке")
